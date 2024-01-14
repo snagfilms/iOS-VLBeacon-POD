@@ -23,21 +23,14 @@ Pod::Spec.new do |spec|
  
   spec.platform     = :ios
   spec.ios.deployment_target = "13.0"
-  spec.tvos.deployment_target = "13.0"
   spec.source       = { :git => "https://github.com/snagfilms/iOS-VLBeacon-POD.git", :tag => "#{spec.version}" }
-  spec.default_subspecs = 'Main'
-
-  spec.subspec 'Main' do |ss|
-    ss.ios.preserve_paths = 'VLBeaconLib.xcframework'
-    ss.ios.vendored_frameworks = 'VLBeaconLib.xcframework'
-    ss.tvOS.preserve_paths = 'VLBeaconLib.xcframework'
-    ss.tvOS.vendored_frameworks = 'VLBeaconLib.xcframework'
-  end
-
-  spec.subspec 'Legacy' do |ss|
-    spec.pod_target_xcconfig  = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e'}
-    spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e'}
-  end
+  # spec.default_subspecs = 'Main'
+  spec.ios.preserve_paths = "VLBeaconLib.xcframework"
+  spec.ios.vendored_frameworks = "VLBeaconLib.xcframework"
+  # spec.subspec 'Main' do |ss|
+  #   ss.ios.preserve_paths = 'VLBeaconLib.xcframework'
+  #   ss.ios.vendored_frameworks = 'VLBeaconLib.xcframework'
+  # end
 
   spec.requires_arc = true
 
