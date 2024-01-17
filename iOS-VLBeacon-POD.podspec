@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
 
   spec.description  = <<-DESC
   Viewlift Beacon SDK for iOS & tvOS
-                   DESC
+  DESC
 
   spec.homepage     = "https://github.com/snagfilms/iOS-VLBeacon-POD"
   spec.license      = { :type => "MIT", :file => "LICENSE" }
@@ -23,15 +23,21 @@ Pod::Spec.new do |spec|
  
   spec.platform     = :ios
   spec.ios.deployment_target = "13.0"
-  spec.source       = { :git => "https://github.com/snagfilms/iOS-VLBeacon-POD.git", :tag => "#{spec.version}" }
-  # spec.default_subspecs = 'Main'
-  spec.ios.preserve_paths = "VLBeaconLib.xcframework"
-  spec.ios.vendored_frameworks = "VLBeaconLib.xcframework"
-  # spec.subspec 'Main' do |ss|
-  #   ss.ios.preserve_paths = 'VLBeaconLib.xcframework'
-  #   ss.ios.vendored_frameworks = 'VLBeaconLib.xcframework'
-  # end
+  spec.source       = { :git => "https://github.com/snagfilms/iOS-VLBeacon-POD.git", :tag => spec.version.to_s }
+  spec.default_subspecs = 'Main'
+  # spec.ios.preserve_paths = "VLBeaconLib.xcframework"
+  # spec.ios.vendored_frameworks = "VLBeaconLib.xcframework"
+  spec.subspec 'Main' do |ss|
+    ss.ios.preserve_paths = 'VLBeaconLib.xcframework'
+    ss.ios.vendored_frameworks = 'VLBeaconLib.xcframework'
+  end
 
+  spec.subspec 'Legacy' do |ss|
+    ss.pod_target_xcconfig  = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e'}
+    ss.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e'}
+  end
+
+  spec.dependency 'SQLite.swift', '0.14.1'
   spec.requires_arc = true
 
 end
